@@ -1,8 +1,9 @@
 import top5 from '@/assets/data/top5.json'
 import * as Either from 'fp-ts/Either'
 import * as Fun from 'fp-ts/function'
+import Stock from '../model/Stock'
 
-export const Top5TestData = Object.values(top5)
+export const Top5TestData: Stock[] = Object.values(top5)
 
 /**
  * Returns the style, prefix and number value corresponding to percent_change.
