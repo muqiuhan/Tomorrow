@@ -1,72 +1,60 @@
-import { Text, View } from "./Themed";
-import { StyleSheet } from "react-native";
-import Stock from "@/src/model/stock";
-import Colors from "@/src/constants/Colors";
-import { AntDesign } from "@expo/vector-icons";
-import { MonoText } from "./StyledText";
-import { Console, Effect, pipe } from "effect";
+import { Text, View } from './Themed'
+import { Alert, StyleSheet } from 'react-native'
+import Stock from '@/src/model/Stock'
+import Colors from '@/src/constants/Colors'
+import { AntDesign } from '@expo/vector-icons'
+import { MonoText } from './StyledText'
+import { PercentChangeInfo } from '../update/Stock'
+import * as Either from 'fp-ts/Either'
+import * as Fun from 'fp-ts/function'
 
-type StockListItem = {
-    stock: Stock
+interface StockListItem {
+  stock: Stock
 }
 
-function toFixed(close: string): string {
-    return pipe(Effect.try({
-        try: () => Number.parseFloat(close.toString()).toFixed(1),
-        catch: (unknwon) => new Error(`Cannot get the fixed number of close, which is ${close}`)
-    }), Effect.runSync);
-}
+const StockListItem = ({ stock }: StockListItem): React.JSX.Element => {
+  const [percentChangeColor, percentChangePrefix, percentChange] =
+        Fun.pipe(
+          PercentChangeInfo(stock.percent_change),
+          Either.match(
+            (err) => Alert.prompt(err),
+            (info) => info
+          )
+        )
 
-function percentChangeColor(percentChange: string): string {
-    return pipe(Effect.try({
-        try: () => Number.parseFloat(percentChange),
-        catch: (err) => new Error(`Cannot get the fixed number of close, which is ${close}\n${err}`)
-    }), Effect.map((percentChange: number) => {
-        return percentChange > 0 ? "red" : "green"
-    }), Effect.runSync);
-}
+  return (
+    <View style={styles.container}>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.symbol}>
+          {stock.symbol}
+          <AntDesign name='staro' size={18} color='grey' />
+        </Text>
+        <Text style={styles.name}> {stock.name} </Text>
+      </View>
 
-function percentChangePrefix(percentChange: string): string {
-    return pipe(Effect.try({
-        try: () => Number.parseFloat(percentChange),
-        catch: (err) => new Error(`Cannot get the fixed number of close, which is ${close}\n${err}`)
-    }), Effect.map((percentChange: number) => {
-        return percentChange > 0 ? "+" : ""
-    }), Effect.runSync);
-}
-
-export default function StockListItem({ stock }: StockListItem): React.JSX.Element {
-    return (
-        <View style={styles.container}>
-            <View style={{ flex: 1 }}>
-                <Text style={styles.symbol}>
-                    {stock.symbol}
-                    <AntDesign name="staro" size={18} color={"grey"} />
-                </Text>
-                <Text style={styles.name}> {stock.name} </Text>
-            </View>
-
-            <View style={{ alignItems: "flex-end" }}>
-                <MonoText style={{}}> {toFixed(stock.close)} </MonoText>
-                <MonoText style={{ color: percentChangeColor(stock.percent_change) }}>
-                    {percentChangePrefix(stock.percent_change)}
-                    {toFixed(stock.percent_change)}%
-                </MonoText>
-            </View>
-        </View>
-    )
+      <View style={{ alignItems: 'flex-end' }}>
+        <MonoText style={{}}> {Number.parseFloat(stock.close).toFixed(1)} </MonoText>
+        <MonoText style={{ color: percentChangeColor }}>
+          {percentChangePrefix}
+          {percentChange}%
+        </MonoText>
+      </View>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row"
-    },
-    symbol: {
-        fontSize: 18,
-        fontWeight: "bold",
-        color: Colors.light.tint
-    },
-    name: {
-        color: "grey"
-    }
+  container: {
+    flexDirection: 'row'
+  },
+  symbol: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: Colors.light.tint
+  },
+  name: {
+    color: 'grey'
+  }
 })
+
+export default StockListItem
