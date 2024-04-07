@@ -1,30 +1,29 @@
-import { Text, View } from './Themed'
-import { Alert, Pressable, StyleSheet } from 'react-native'
-import Stock from '@/src/model/Stock'
-import Colors from '@/src/constants/Colors'
-import { AntDesign } from '@expo/vector-icons'
-import { MonoText } from './StyledText'
-import { PercentChangeInfo } from '../update/Stock'
-import * as Either from 'fp-ts/Either'
-import * as Fun from 'fp-ts/function'
-import { Link } from 'expo-router'
+import { Text, View } from "./Themed";
+import { Alert, Pressable, StyleSheet } from "react-native";
+import Stock from "@/src/model/Stock";
+import Colors from "@/src/constants/Colors";
+import { AntDesign } from "@expo/vector-icons";
+import { MonoText } from "./StyledText";
+import { PercentChangeInfo } from "../update/Stock";
+import * as Either from "fp-ts/Either";
+import * as Fun from "fp-ts/function";
+import { Link } from "expo-router";
 
 interface StockListItem {
-  stock: Stock
+  stock: Stock;
 }
 
 const StockListItem = ({ stock }: StockListItem): React.JSX.Element => {
-  const [percentChangeColor, percentChangePrefix, percentChange] =
-    Fun.pipe(
-      PercentChangeInfo(stock.percent_change),
-      Either.match(
-        (err) => {
-          Alert.prompt(err)
-          return ['grey', '', 'ERROR']
-        },
-        (info) => info
-      )
+  const [percentChangeColor, percentChangePrefix, percentChange] = Fun.pipe(
+    PercentChangeInfo(stock.percent_change),
+    Either.match(
+      (err) => {
+        Alert.prompt(err);
+        return ["grey", "", "ERROR"];
+      },
+      (info) => info
     )
+  );
 
   return (
     <Link href={`/${stock.symbol}`} asChild>
@@ -32,13 +31,16 @@ const StockListItem = ({ stock }: StockListItem): React.JSX.Element => {
         <View style={{ flex: 1 }}>
           <Text style={styles.symbol}>
             {stock.symbol}
-            <AntDesign name='staro' size={18} color='grey' />
+            <AntDesign name="staro" size={18} color="grey" />
           </Text>
           <Text style={styles.name}> {stock.name} </Text>
         </View>
 
-        <View style={{ alignItems: 'flex-end' }}>
-          <MonoText style={{}}> {Number.parseFloat(stock.close).toFixed(1)} </MonoText>
+        <View style={{ alignItems: "flex-end" }}>
+          <MonoText style={{}}>
+            {" "}
+            {Number.parseFloat(stock.close).toFixed(1)}{" "}
+          </MonoText>
           <MonoText style={{ color: percentChangeColor }}>
             {percentChangePrefix}
             {percentChange} %
@@ -46,21 +48,21 @@ const StockListItem = ({ stock }: StockListItem): React.JSX.Element => {
         </View>
       </Pressable>
     </Link>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
+    flexDirection: "row",
   },
   symbol: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: Colors.light.tint
+    fontWeight: "bold",
+    color: Colors.light.tint,
   },
   name: {
-    color: 'grey'
-  }
-})
+    color: "grey",
+  },
+});
 
-export default StockListItem
+export default StockListItem;
