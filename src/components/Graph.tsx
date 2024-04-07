@@ -27,6 +27,8 @@ const points: GraphPoint[] = Array.map((value: TimeSeriesModel.Model) => ({
 
 const Graph = () => {
   const [selectedPoint, setSelectedPoint] = useState<GraphPoint>()
+
+  /* The default point is the last point of points */
   const lastPoint = Array.last(points)
 
   return (

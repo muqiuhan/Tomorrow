@@ -3,6 +3,7 @@ import * as Fun from 'fp-ts/function'
 import * as Option from 'fp-ts/Option'
 import { Alert } from 'react-native'
 
+/** This is the parameter of react-native-graph/LineGraph component. */
 export const OnPointSelected =
   (
     _selectedPoint: GraphPoint | undefined,
@@ -14,7 +15,8 @@ export const OnPointSelected =
       setSelectedPoint(point)
     }
 
-export const GetSelectPointValue = (
+/** Convert selectPoint from GraphPoint | undefined to Option<GraphPoint> */
+export const SafeGetSelectPoint = (
   selectPoint: GraphPoint | undefined
 ): Option.Option<GraphPoint> => {
   if (selectPoint === undefined) {
@@ -30,7 +32,7 @@ export const SelectedPointValue = (
 ): string => {
   return Fun.pipe(
     selectedPoint,
-    GetSelectPointDate,
+    SafeGetSelectPoint,
     Option.match(
       (): string => {
         return Fun.pipe(
@@ -49,23 +51,13 @@ export const SelectedPointValue = (
   )
 }
 
-export const GetSelectPointDate = (
-  selectPoint: GraphPoint | undefined
-): Option.Option<GraphPoint> => {
-  if (selectPoint === undefined) {
-    return Option.none
-  } else {
-    return Option.some(selectPoint)
-  }
-}
-
 export const SelectedPointDate = (
   selectedPoint: GraphPoint | undefined,
   lastPoint: Option.Option<GraphPoint>
 ): string => {
   return Fun.pipe(
     selectedPoint,
-    GetSelectPointDate,
+    SafeGetSelectPoint,
     Option.match(
       (): string => {
         return Fun.pipe(
