@@ -1,9 +1,7 @@
-import top5 from "@/assets/data/top5.json";
-import * as Either from "fp-ts/Either";
-import * as Fun from "fp-ts/function";
-import Stock from "../model/Stock";
 
-export const Top5TestData: Stock[] = Object.values(top5);
+import * as Either from 'fp-ts/Either'
+import * as Fun from 'fp-ts/function'
+import Stock from '../model/Stock'
 
 /**
  * Returns the style, prefix and number value corresponding to percent_change.
@@ -17,13 +15,13 @@ export const PercentChangeInfo = (
     if (Number.isNaN(value)) {
       return Either.left(
         `Failed to parse the percent_change: ${percentChange}`
-      );
+      )
     } else {
       return Either.right([
-        value > 0 ? "red" : "green",
-        value > 0 ? "+" : "",
-        value.toFixed(1),
-      ]);
+        value > 0 ? 'red' : 'green',
+        value > 0 ? '+' : '',
+        value.toFixed(1)
+      ])
     }
-  });
-};
+  })
+}

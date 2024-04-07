@@ -1,24 +1,22 @@
-import { View, Text } from "@/src/components/Themed";
-import { Stack, useLocalSearchParams } from "expo-router";
-import { Top5TestData } from "../update/Stock";
-import * as Array from "fp-ts/Array";
-import * as Option from "fp-ts/Option";
-import * as Fun from "fp-ts/function";
-import { Alert, StyleSheet } from "react-native";
-import Stock from "../model/Stock";
-import { ReactElement } from "react";
-import StockListItem from "../components/StockListItem";
+import { View, Text } from '@/src/components/Themed'
+import { Stack, useLocalSearchParams } from 'expo-router'
+import * as Array from 'fp-ts/Array'
+import * as Option from 'fp-ts/Option'
+import * as StockModel from '@/src/model/Stock'
+import { Alert, StyleSheet } from 'react-native'
+import StockListItem from '../components/StockListItem'
+import Graph from '../components/Graph'
 
 const Details = () => {
-  const { symbol } = useLocalSearchParams();
-  const stock: Option.Option<Stock> = Array.findFirst(
-    (stock: Stock) => stock.symbol == symbol
-  )(Top5TestData);
+  const { symbol } = useLocalSearchParams()
+  const stock: Option.Option<StockModel.Model> = Array.findFirst(
+    (stock: StockModel.Model) => stock.symbol == symbol
+  )(StockModel.TestData)
 
   if (Option.isNone(stock)) {
-    Alert.alert(`Stock with symbol ${symbol} could not be found`);
+    Alert.alert(`Stock with symbol ${symbol} could not be found`)
 
-    return <Text>Stock with symbol {symbol} could not be found</Text>;
+    return <Text>Stock with symbol {symbol} could not be found</Text>
   }
 
   return (
@@ -26,18 +24,19 @@ const Details = () => {
       <Stack.Screen
         options={{
           title: `Stock details for ${stock.value.symbol}`,
-          headerBackTitleVisible: false,
+          headerBackTitleVisible: false
         }}
       />
       <StockListItem stock={stock.value} />
+      <Graph />
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-  },
-});
+    padding: 10
+  }
+})
 
-export default Details;
+export default Details
