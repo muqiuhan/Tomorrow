@@ -1,14 +1,27 @@
-import { View, Text } from "react-native"
-import React from "react"
+import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import styled from "styled-components/native";
+import RootNavigation from "./app/screens/navigation/RootNavigation";
+import useCachedResources from "./hooks/useCachedResources";
 
 const App = () => {
-    return(
-        <>
-            <View className="bg-blue-500 flex-1 justify-center items-center">
-                <Text className="text-white text-3xl font-semibold"> Hello World </Text>
-            </View>
-        </>
-    )
-}
+  const isLoadingComplete = useCachedResources();
+
+  if (!isLoadingComplete) {
+    return null;
+  }
+
+  return (
+    <Container>
+      <StatusBar style="auto" />
+      <RootNavigation />
+    </Container>
+  );
+};
+
+const Container = styled(View)`
+  flex: 1;
+`;
 
 export default App;
