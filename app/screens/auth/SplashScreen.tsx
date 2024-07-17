@@ -16,7 +16,7 @@ const SplashScreen = () => {
 
   /* expo-image supports BlurHash and ThumbHash - compact representations of a placeholder for an image.
    * see: https://blurha.sh/ */
-  const blurhash = "LB3|F$uhUbaKuhkVVYaeUcVYQ8aK";
+  const blurhash = "LGPZy6t7~qflxtWBRlt7?bRjs%xu";
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -39,7 +39,7 @@ const SplashScreen = () => {
             <View className="w-20 h-20 overflow-hidden">
               <Image
                 className="w-full h-full flex-1"
-                source={require("../../../assets/splash.png")}
+                source={require("../../../assets/images/splash.png")}
                 contentFit="cover"
                 transition={1000}
                 placeholder={blurhash}
@@ -56,7 +56,7 @@ const SplashScreen = () => {
           <Text className="text-neutral-600 text-xl leading-[60px] pl-1" style={{fontFamily: "MiSans"}}>
             TOMO
           </Text>
-          <Text className="text-[#31aca3] text-xl leading-[60px] pl-1" style={{fontFamily: "MiSans"}}>
+          <Text className="text-[#4984dc] text-xl leading-[60px] pl-1" style={{fontFamily: "MiSans"}}>
             RROW
           </Text>
         </Animated.View>
