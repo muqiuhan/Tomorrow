@@ -1,8 +1,5 @@
 const Avatar = () => {
-    return (
-        <>
-        </>
-    )
-}
+  return <></>;
+};
 
 export default Avatar;

@@ -3,16 +3,22 @@ import Button from "@/app/components/Button";
 import ButtonOutline from "@/app/components/ButtonOutline";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import Animated, * as ReactNativeReanimated from "react-native-reanimated";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
+import * as ReactNavigationNative from "@react-navigation/native";
+import Animated, * as ReactNativeReanimated from "react-native-reanimated";
 
 const WelcomeScreen = () => {
   const blurhash = "LGPZy6t7~qflxtWBRlt7?bRjs%xu";
 
+  const {
+    navigate: navigateAuth,
+  }: ReactNavigationNative.NavigationProp<AuthNavigationType> =
+    ReactNavigationNative.useNavigation();
+
   return (
-    <SafeAreaView className="flex-1 justify-between items-center">
+    <View className="flex-1 justify-between items-center">
       <StatusBar style="auto" />
       <View className="w-full h-full px-4 items-center justify-center space-y-6">
         <View className="w-full px-4 items-center">
@@ -53,7 +59,7 @@ const WelcomeScreen = () => {
               .delay(300)
               .springify()}
           >
-            <Button text="Login" />
+            <Button text="Login" action={() => navigateAuth("Login")} />
           </Animated.View>
 
           <Animated.View
@@ -61,7 +67,10 @@ const WelcomeScreen = () => {
               .delay(400)
               .springify()}
           >
-            <ButtonOutline text="Sign up" />
+            <ButtonOutline
+              text="Sign up"
+              action={() => navigateAuth("Register")}
+            />
           </Animated.View>
         </View>
 
@@ -92,7 +101,7 @@ const WelcomeScreen = () => {
           </Animated.View>
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
