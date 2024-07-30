@@ -85,8 +85,8 @@ const WelcomeScreen = () => {
               .delay(600)
               .springify()}
           >
-            <ButtonOutline text="Continue with Google">
-              <AntDesign name="google" size={20} color="grey" />
+            <ButtonOutline text="Continue with Google" bg="bg-black" fg="text-white" >
+              <AntDesign name="google" size={20} color="white" />
             </ButtonOutline>
           </Animated.View>
 
@@ -95,8 +95,8 @@ const WelcomeScreen = () => {
               .delay(700)
               .springify()}
           >
-            <ButtonOutline text="Continue with Apple">
-              <AntDesign name="apple1" size={20} color="grey" />
+            <ButtonOutline text="Continue with Apple" bg="bg-black" fg="text-white" >
+              <AntDesign name="apple1" size={20} color="white" />
             </ButtonOutline>
           </Animated.View>
         </View>
