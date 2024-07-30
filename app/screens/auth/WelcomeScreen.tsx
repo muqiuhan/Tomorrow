@@ -59,7 +59,7 @@ const WelcomeScreen = () => {
               .delay(300)
               .springify()}
           >
-            <Button text="Login" action={() => navigateAuth("Login")} />
+            <Button text="登陆" action={() => navigateAuth("Login")} />
           </Animated.View>
 
           <Animated.View
@@ -68,7 +68,7 @@ const WelcomeScreen = () => {
               .springify()}
           >
             <ButtonOutline
-              text="Sign up"
+              text="注册"
               action={() => navigateAuth("Register")}
             />
           </Animated.View>
@@ -85,7 +85,7 @@ const WelcomeScreen = () => {
               .delay(600)
               .springify()}
           >
-            <ButtonOutline text="Continue with Google" bg="bg-black" fg="text-white" >
+            <ButtonOutline text="使用你的 Google 账号" bg="bg-black" fg="text-white">
               <AntDesign name="google" size={20} color="white" />
             </ButtonOutline>
           </Animated.View>
@@ -95,7 +95,7 @@ const WelcomeScreen = () => {
               .delay(700)
               .springify()}
           >
-            <ButtonOutline text="Continue with Apple" bg="bg-black" fg="text-white" >
+            <ButtonOutline text="使用你的 Apple 账号" bg="bg-black" fg="text-white">
               <AntDesign name="apple1" size={20} color="white" />
             </ButtonOutline>
           </Animated.View>

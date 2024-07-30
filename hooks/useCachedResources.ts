@@ -11,7 +11,7 @@ const useCachedResources = () => {
       try {
         ExpoSplashScreen.preventAutoHideAsync();
         await ExpoFont.loadAsync({
-          FrakMono: require("../assets/fonts/FrankMono.ttf"),
+          FrankMono: require("../assets/fonts/FrankMono.ttf"),
           MiSans: require("../assets/fonts/MiSans_Semibold.ttf"),
           ...ExpoVectorIcons.FontAwesome.font,
         });
