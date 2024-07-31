@@ -5,6 +5,7 @@ import {
   Dimensions,
   TextInput,
   Pressable,
+  Alert,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
@@ -13,6 +14,7 @@ import * as ReactNavigationNative from "@react-navigation/native";
 import Button from "@/app/components/Button";
 import Breaker from "@/app/components/Breaker";
 import ButtonOutline from "@/app/components/ButtonOutline";
+import { supabase } from "@/lib/supabase";
 
 const { width, height } = Dimensions.get("window");
 
@@ -26,6 +28,22 @@ const RegisterScreen = () => {
   const [passwordIsVisible, setPasswordIsVisible] = React.useState(false);
 
   const [isLoading, setIsLoading] = React.useState(false);
+
+  const signUpWithEmail = async () => {
+    setIsLoading(true);
+
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+
+    if (!session) Alert.alert("注册成功！请检查你的邮箱中用于验证的邮件");
+    if (error) setIsLoading(false);
+    else setIsLoading(false);
+  };
 
   const {
     navigate: navigateAuth,
@@ -141,6 +159,7 @@ const RegisterScreen = () => {
               action={() => {
                 if (email === "") setEmailBorderColor("border-red-500");
                 if (password === "") setPasswordBorderColor("border-red-500");
+                signUpWithEmail();
               }}
             />
           </Animated.View>
