@@ -41,8 +41,10 @@ const RegisterScreen = () => {
     });
 
     if (!session) Alert.alert("注册成功！请检查你的邮箱中用于验证的邮件");
-    if (error) setIsLoading(false);
-    else setIsLoading(false);
+    if (error) {
+      setIsLoading(false);
+      Alert.alert(error.message);
+    } else setIsLoading(false);
   };
 
   const {

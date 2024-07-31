@@ -5,6 +5,7 @@ import {
   Dimensions,
   TextInput,
   Pressable,
+  Alert,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import React from "react";
@@ -13,6 +14,8 @@ import * as ReactNavigationNative from "@react-navigation/native";
 import Button from "@/app/components/Button";
 import Breaker from "@/app/components/Breaker";
 import ButtonOutline from "@/app/components/ButtonOutline";
+import { supabase } from "@/lib/supabase";
+import { useUserStore } from "@/store/useUserStore";
 
 const { width, height } = Dimensions.get("window");
 
@@ -24,13 +27,35 @@ const LoginScreen = () => {
   const [passwordBorderColor, setPasswordBorderColor] =
     React.useState("border-gray-400");
   const [passwordIsVisible, setPasswordIsVisible] = React.useState(false);
-
   const [isLoading, setIsLoading] = React.useState(false);
-
   const {
     navigate: navigateAuth,
   }: ReactNavigationNative.NavigationProp<AuthNavigationType> =
     ReactNavigationNative.useNavigation();
+  const { setUser, setSession } = useUserStore();
+
+  const signInWithEmail = async () => {
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+      });
+
+      if (error) {
+        setIsLoading(false);
+        Alert.alert(error.message);
+      }
+
+      if (data.session && data.user) {
+        setSession(data.session);
+        setUser(data.user);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <View className="flex-1">
@@ -86,7 +111,7 @@ const LoginScreen = () => {
               <TextInput
                 className="p-3"
                 style={{
-                    fontFamily: "FrankMono"
+                  fontFamily: "FrankMono",
                 }}
                 onChangeText={(text) => {
                   setEmail(text);
@@ -104,7 +129,7 @@ const LoginScreen = () => {
               <TextInput
                 className="p-3"
                 style={{
-                    fontFamily: "FrankMono"
+                  fontFamily: "FrankMono",
                 }}
                 onChangeText={(text) => {
                   setPassword(text);
@@ -141,6 +166,8 @@ const LoginScreen = () => {
               action={() => {
                 if (email === "") setEmailBorderColor("border-red-500");
                 if (password === "") setPasswordBorderColor("border-red-500");
+
+                signInWithEmail();
               }}
             />
           </Animated.View>

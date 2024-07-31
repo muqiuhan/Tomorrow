@@ -38,7 +38,7 @@ const useSupabaseAuth = () => {
 
     const { data, error, status } = await supabase
       .from("profiles")
-      .select("username, fullname, avatar_url, website")
+      .select("username, full_name, avatar_url, website")
       .eq("id", session?.user.id)
       .single();
 
@@ -47,7 +47,7 @@ const useSupabaseAuth = () => {
 
   const updateUserProfile = async (
     username: string,
-    fullname: string,
+    fullName: string,
     avatarUrl: string,
     website: string
   ) => {
@@ -56,7 +56,7 @@ const useSupabaseAuth = () => {
     const { error } = await supabase.from("profiles").upsert({
       id: session?.user.id,
       username,
-      fullname,
+      full_name: fullName,
       website,
       avatar_url: avatarUrl,
       update_date: new Date(),
