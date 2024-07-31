@@ -22,7 +22,7 @@ const useSupabaseAuth = () => {
     return { error, data };
   };
 
-  const singOut = async (email: string, password: string) => {
+  const signOut = async () => {
     const { error } = await supabase.auth.signOut();
 
     if (!error) {
@@ -68,7 +68,7 @@ const useSupabaseAuth = () => {
   return {
     signInWithEmail,
     signUpWithEmail,
-    singOut,
+    signOut,
     getUserProfile,
     updateUserProfile,
   };
