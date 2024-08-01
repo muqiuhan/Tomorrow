@@ -97,10 +97,10 @@ const styles = StyleSheet.create({
   },
   noimage: {
     backgroundColor: "gray",
-    borderWidth: 2,
+    borderWidth: 1,
     borderStyle: "solid",
     borderColor: "rgb(200, 200, 200)",
-    borderRadius: 20,
+    borderRadius: 1,
   },
 });
 

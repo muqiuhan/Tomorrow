@@ -1,6 +1,4 @@
-import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
 import * as ReactNavigationBottomTabs from "@react-navigation/bottom-tabs";
 import * as ReactNavigationStack from "@react-navigation/stack";
 import HomeNavigation from "./HomeNavigation";
@@ -18,15 +16,15 @@ const TabNavigation = () => {
         headerShown: false,
         tabBarIcon: ({ focused }) => {
           const iconName = () => {
-            if (route.name === "home") {
+            if (route.name === "Home") {
               return "home";
-            } else if (route.name === "market") {
+            } else if (route.name === "Market") {
               return "stats-chart-outline";
-            } else if (route.name === "search") {
+            } else if (route.name === "Search") {
               return "search-outline";
-            } else if (route.name === "news") {
+            } else if (route.name === "News") {
               return "newspaper-outline";
-            } else if (route.name === "profile") {
+            } else if (route.name === "Profile") {
               return "person-outline";
             }
           };
@@ -52,11 +50,11 @@ const TabNavigation = () => {
         gestureDirection: "horizontal",
       })}
     >
-      <Tab.Screen name="home" component={HomeNavigation} />
-      <Tab.Screen name="market" component={MarketNavigation} />
-      <Tab.Screen name="search" component={SearchNavigation} />
-      <Tab.Screen name="news" component={NewsDetailsScreen} />
-      <Tab.Screen name="profile" component={ProfileNavigation} />
+      <Tab.Screen name="Home" component={HomeNavigation} />
+      <Tab.Screen name="Market" component={MarketNavigation} />
+      <Tab.Screen name="Search" component={SearchNavigation} />
+      <Tab.Screen name="News" component={NewsDetailsScreen} />
+      <Tab.Screen name="Profile" component={ProfileNavigation} />
     </Tab.Navigator>
   );
 };
