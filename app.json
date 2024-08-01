@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "tomorrow",
-    "slug": "tomorrow",
+    "slug": "Tomorrow",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.muqiuhan.Tomorrow"
     },
     "web": {
       "bundler": "metro",
@@ -31,6 +32,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1eb05cd1-94ac-4408-beb7-17644ec3de5e"
+      }
+    },
+    "owner": "muqiuhan"
   }
 }
