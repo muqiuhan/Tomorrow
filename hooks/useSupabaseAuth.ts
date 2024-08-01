@@ -59,7 +59,7 @@ const useSupabaseAuth = () => {
       full_name: fullName,
       website,
       avatar_url: avatarUrl,
-      update_date: new Date(),
+      updated_at: new Date(),
     });
 
     return { error };
@@ -73,3 +73,5 @@ const useSupabaseAuth = () => {
     updateUserProfile,
   };
 };
+
+export default useSupabaseAuth;
