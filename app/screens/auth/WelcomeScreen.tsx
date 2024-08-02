@@ -3,7 +3,6 @@ import Button from "@/app/components/Button";
 import ButtonOutline from "@/app/components/ButtonOutline";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { AntDesign } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import * as ReactNavigationNative from "@react-navigation/native";

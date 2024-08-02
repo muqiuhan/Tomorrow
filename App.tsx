@@ -11,8 +11,6 @@ const App = () => {
   const isLoadingComplete = useCachedResources();
   const { session, user } = useUserStore();
 
-  React.useEffect(() => console.log(user, session), [user, session]);
-
   if (!isLoadingComplete) {
     return null;
   }

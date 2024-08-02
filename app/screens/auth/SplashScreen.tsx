@@ -3,12 +3,10 @@ import * as Nativewind from "nativewind";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { Image } from "expo-image";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Animated, * as ReactNativeReanimated from "react-native-reanimated";
 import React from "react";
 
 const SplashScreen = () => {
-  const { colorScheme, toggleColorScheme } = Nativewind.useColorScheme();
   const {
     navigate: navigateWelcome,
   }: ReactNavigationNative.NavigationProp<SplashNavigationType> =

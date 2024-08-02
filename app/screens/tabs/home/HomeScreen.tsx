@@ -8,7 +8,6 @@ import * as CryptoAPI from "@/api/crypto";
 import { ActivityIndicator, Alert, Pressable, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useUserStore } from "@/store/useUserStore";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Image } from "expo-image";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
 
@@ -147,7 +146,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <View className="flex-1 bg-white mt-1">
       <View className="w-full flex-row justify-between items-center px-4 py-4">
         <View className="w-3/4 flex-row space-x-3">
           <View className="justify-center items-center">
@@ -179,7 +178,7 @@ const HomeScreen = () => {
         </View>
       </View>
 
-      <View className="mx-4 bg-neutral-800 rounded-3xl overflow-hidden mt-4 mb-4">
+      <View className="mx-4 bg-neutral-800 rounded-3xl overflow-hidden mb-2">
         <View className="bg-orange-400 justify-center items-center py-6 rounded-3xl">
           <Text
             className="text-sm font-medium text-neutral-700 mb-1"
@@ -280,7 +279,7 @@ const HomeScreen = () => {
           />
         )}
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
