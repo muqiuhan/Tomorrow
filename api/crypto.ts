@@ -30,7 +30,7 @@ export const fetchAllCoin = async () =>
   });
 
 export const fetchCoinDetails = async (coinUuid: string) =>
-  await apiCall(`https://api.coinranking.com/v2/coin/${coinUuid}/`, {
+  await apiCall(`https://api.coinranking.com/v2/coin/${coinUuid}`, {
     referenceCurrencyUuid: "yhjMzLPhuIDl",
     timePeriod: "24h",
   });

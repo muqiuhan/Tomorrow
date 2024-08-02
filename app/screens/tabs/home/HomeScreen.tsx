@@ -35,6 +35,10 @@ const HomeScreen = () => {
   const [loading, setLoading] = React.useState(false);
   const { getUserProfile } = useSupabaseAuth();
   const { session } = useUserStore();
+  const {
+    navigate,
+  }: ReactNavigationNative.NavigationProp<ScreenNavigationType> =
+    ReactNavigationNative.useNavigation();
 
   const handleGetProfile = async () => {
     setLoading(true);
@@ -72,7 +76,12 @@ const HomeScreen = () => {
 
   const renderCoins = ({ item, index }: { item: Coin; index: number }) => {
     return (
-      <Pressable className="flex-row w-full py-3 items-center">
+      <Pressable
+        className="flex-row w-full py-3 items-center"
+        onPress={() => {
+          navigate("coindetails", { coinUuid: item.uuid });
+        }}
+      >
         <Animated.View
           className="w-full flex-row justify-center items-center"
           entering={ReactNativeReanimated.FadeInDown.duration(100)
