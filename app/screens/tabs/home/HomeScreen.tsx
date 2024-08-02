@@ -25,7 +25,7 @@ interface Coin {
 interface Coins {
   data: {
     data: {
-      coins: Array<any>;
+      coins: Array<Coin>;
     };
   };
 }
@@ -96,7 +96,7 @@ const HomeScreen = () => {
 
           <View className="w-[50%] justify-start items-start">
             <Text
-              className="font-bold text-lg"
+              className="font-bold text-lg underline"
               style={{ fontFamily: "MiSans" }}
             >
               {item.name}
@@ -104,10 +104,12 @@ const HomeScreen = () => {
 
             <View className="flex-row justify-center items-center space-x-2">
               <Text
-                className="font-medium text-sm text-neutral-500"
+                className="font-medium text-sm text-blue-800"
                 style={{ fontFamily: "FrankMono" }}
               >
-                {parseFloat(item?.price)}
+                {`$ ${parseFloat(item?.price)
+                  .toFixed(2)
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
               </Text>
 
               <Text
@@ -147,7 +149,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="w-full flex-row justify-between items-center px-4 py-4">
-        <View className="w-3/4 flex-row space-x-2">
+        <View className="w-3/4 flex-row space-x-3">
           <View className="justify-center items-center">
             <View className="h-12 w-12 rounded-2xl overflow-hidden">
               <Avatar url={avatarUrl} size={50} />
@@ -178,7 +180,7 @@ const HomeScreen = () => {
       </View>
 
       <View className="mx-4 bg-neutral-800 rounded-3xl overflow-hidden mt-4 mb-4">
-        <View className="bg-[#56fde7b3] justify-center items-center py-6 rounded-3xl">
+        <View className="bg-orange-400 justify-center items-center py-6 rounded-3xl">
           <Text
             className="text-sm font-medium text-neutral-700 mb-1"
             style={{

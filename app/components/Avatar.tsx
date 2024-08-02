@@ -1,4 +1,5 @@
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 import { supabase } from "@/lib/supabase";
 import { Pressable, View } from "react-native";
 import { ActivityIndicator, Image, StyleSheet } from "react-native";
@@ -20,6 +21,7 @@ const Avatar: React.FC<AvatarProps> = ({
 }) => {
   const [uploading, setUploading] = React.useState(false);
   const [avatarUrl, setAvatarUrl] = React.useState<string | null>(null);
+  const [avatarDownloadError, setAvatarDownloadError] = React.useState(false);
   const avatarSize = { height: size, width: size };
 
   const downloadImage = async (path: string) => {
@@ -36,8 +38,10 @@ const Avatar: React.FC<AvatarProps> = ({
         setAvatarUrl(fileReader.result as string);
       };
     } catch (error) {
-      if (error instanceof Error)
+      if (error instanceof Error) {
         console.log("Downloading image error: " + error.message);
+        setAvatarDownloadError(true);
+      }
     }
   };
 
@@ -57,30 +61,33 @@ const Avatar: React.FC<AvatarProps> = ({
             style={[avatarSize, styles.avatar, styles.image]}
           />
         </View>
+      ) : avatarDownloadError ? (
+        <View
+          className="justify-center items-center"
+          style={[avatarSize, styles.avatar, styles.noimage]}
+        >
+          <Ionicons name="person-outline" size={25} color="gray" />
+        </View>
       ) : (
         <View
           className="justify-center items-center"
           style={[avatarSize, styles.avatar, styles.noimage]}
         >
-          <ActivityIndicator color="white" />
+          <ActivityIndicator color="gray" />
         </View>
       )}
 
-      {
-        showUpload && (
-          <View className="absolute right-0 bottom-0">
-            {
-              !uploading ? (
-                <Pressable>
-                  <MaterialIcons name="cloud-upload" size={30} color="black" />
-                </Pressable>
-              ) : (
-                <ActivityIndicator color="white" />
-              )
-            }
-          </View>
-        )
-      }
+      {showUpload && (
+        <View className="absolute right-0 bottom-0">
+          {!uploading ? (
+            <Pressable>
+              <MaterialIcons name="cloud-upload" size={30} color="black" />
+            </Pressable>
+          ) : (
+            <ActivityIndicator color="gray" />
+          )}
+        </View>
+      )}
     </View>
   );
 };
@@ -96,11 +103,11 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   noimage: {
-    backgroundColor: "gray",
+    backgroundColor: "white",
     borderWidth: 1,
     borderStyle: "solid",
-    borderColor: "rgb(200, 200, 200)",
-    borderRadius: 1,
+    borderColor: "gray",
+    borderRadius: 100,
   },
 });
 
