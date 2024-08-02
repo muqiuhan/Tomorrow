@@ -17,7 +17,7 @@ import ButtonOutline from "@/app/components/ButtonOutline";
 import { supabase } from "@/lib/supabase";
 import { useUserStore } from "@/store/useUserStore";
 
-const { width, height } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 const LoginScreen = () => {
   const [email, setEmail] = React.useState("");
@@ -52,8 +52,8 @@ const LoginScreen = () => {
         setSession(data.session);
         setUser(data.user);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      Alert.alert(`${error}`);
     }
   };
 

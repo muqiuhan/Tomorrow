@@ -5,7 +5,7 @@ import Animated, * as ReactNativeReanimated from "react-native-reanimated";
 import * as ReactNavigationNative from "@react-navigation/native";
 import * as ReactQuery from "@tanstack/react-query";
 import * as CryptoAPI from "@/api/crypto";
-import { ActivityIndicator, Pressable, Text, View } from "react-native";
+import { ActivityIndicator, Alert, Pressable, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useUserStore } from "@/store/useUserStore";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -52,7 +52,7 @@ const HomeScreen = () => {
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
-      console.log(error);
+      Alert.alert(`${error}`);
     } finally {
       setLoading(false);
     }

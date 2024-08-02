@@ -1,7 +1,7 @@
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { supabase } from "@/lib/supabase";
-import { Pressable, View } from "react-native";
+import { Alert, Pressable, View } from "react-native";
 import { ActivityIndicator, Image, StyleSheet } from "react-native";
 import * as ExpoImagePicker from "expo-image-picker";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -9,7 +9,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 interface AvatarProps {
   size: number;
   url: string | null;
-  onUpload: (filePath: string) => void;
+  onUpload?: (filePath: string) => void;
   showUpload?: boolean;
 }
 
@@ -39,7 +39,7 @@ const Avatar: React.FC<AvatarProps> = ({
       };
     } catch (error) {
       if (error instanceof Error) {
-        console.log("Downloading image error: " + error.message);
+        Alert.prompt("Downloading image error: " + error.message);
         setAvatarDownloadError(true);
       }
     }
