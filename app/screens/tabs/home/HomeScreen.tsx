@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useUserStore } from "@/store/useUserStore";
 import { Image } from "expo-image";
 import { FlatList, ScrollView } from "react-native-gesture-handler";
+import { price } from "@/utils/price";
 
 interface Coin {
   uuid: string;
@@ -115,19 +116,18 @@ const HomeScreen = () => {
                 className="font-medium text-sm text-blue-800"
                 style={{ fontFamily: "FrankMono" }}
               >
-                {`$ ${parseFloat(item?.price)
-                  .toFixed(2)
-                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                { price(item?.price) }
               </Text>
 
               <Text
-                className={`font-medium text-sm ${
+                className={`text-sm ${
                   item.change < 0
                     ? "text-red-600"
                     : item.change > 0
                     ? "text-green-600"
                     : "text-gray-600"
                 }`}
+                style={{ fontFamily: "FrankMono" }}
               >
                 {item.change}%
               </Text>
