@@ -123,7 +123,7 @@ const CoinDetailsScreen = () => {
             </View>
           </View>
 
-          <View className="px-4 py-2 mt-4 justify-center items-center bg-blue-800 rounded-3xl overflow-hidden">
+          <View className="px-4 py-2 mt-4 ml-1 mr-1 justify-center items-center bg-teal-800 rounded-lg overflow-hidden">
             <Text
               className="text-2xl text-white"
               style={{ fontFamily: "FrankMono" }}
@@ -230,7 +230,7 @@ const CoinDetailsScreen = () => {
         </View>
       </View>
 
-      <View className="px-4 py-4 bg-[#d8dee9] ml-2 mr-2 rounded-3xl mt-4 overflow-hidden">
+      <View className="px-4 py-4 bg-blue-200 bg-bl ml-2 mr-2 rounded-lg mt-4 overflow-hidden">
         <View className="flex-row justify-between">
           <Text className="text-base" style={{ fontFamily: "MiSans" }}>
             历史新高
